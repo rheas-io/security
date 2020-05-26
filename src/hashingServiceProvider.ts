@@ -1,3 +1,4 @@
+import { IApp } from "@rheas/contracts/core";
 import { ServiceProvider } from "@rheas/core";
 import { HashingManager } from "./hashingManager";
 import { IDeferredService } from "../../contracts/build/services";
@@ -11,7 +12,9 @@ export class HashingServiceProvider extends ServiceProvider implements IDeferred
      */
     public register() {
         this.container.singleton('hash', (app) => {
-            return new HashingManager();
+            const hashingConfig = (<IApp>app).config('hashing');
+
+            return new HashingManager(hashingConfig);
         });
     }
 

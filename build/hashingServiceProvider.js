@@ -28,7 +28,8 @@ var HashingServiceProvider = /** @class */ (function (_super) {
      */
     HashingServiceProvider.prototype.register = function () {
         this.container.singleton('hash', function (app) {
-            return new hashingManager_1.HashingManager();
+            var hashingConfig = app.config('hashing');
+            return new hashingManager_1.HashingManager(hashingConfig);
         });
     };
     /**
