@@ -24,10 +24,17 @@
     "copypackage_dev": "cp -rf package.json build_dev",
     "build-dev": "tsc --outDir ./build_dev && npm run copypackage_dev"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "md5": "^2.2.1",
+    "sha.js": "^2.4.11"
+  },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/jest": "^25.2.1",
+    "@types/md5": "^2.2.0",
     "@types/node": "^13.13.2",
+    "@types/sha.js": "^2.4.0",
     "jest": "^25.4.0",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
