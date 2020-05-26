@@ -68,7 +68,7 @@ export class HashingManager implements IHashManager {
      * @returns IHasher
      */
     public createDefaultHasher(): IHasher {
-        return new BcryptHashing();
+        return new Md5Hashing();
     }
 
     /**

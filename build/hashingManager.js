@@ -85,7 +85,7 @@ var HashingManager = /** @class */ (function () {
      * @returns IHasher
      */
     HashingManager.prototype.createDefaultHasher = function () {
-        return new bcryptHashing_1.BcryptHashing();
+        return new md5Hashing_1.Md5Hashing();
     };
     /**
      * Creates a pepper key for the application that can be used
