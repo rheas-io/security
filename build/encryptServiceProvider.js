@@ -27,7 +27,7 @@ var EncryptServiceProvider = /** @class */ (function (_super) {
      * @inheritdoc
      */
     EncryptServiceProvider.prototype.register = function () {
-        this.container.singleton('encrypt', function (app) {
+        this.container.singleton(this.provide(), function (app) {
             return new encryptor_1.Encryptor();
         });
     };

@@ -10,7 +10,7 @@ export class EncryptServiceProvider extends ServiceProvider implements IDeferred
      * @inheritdoc
      */
     public register() {
-        this.container.singleton('encrypt', (app) => {
+        this.container.singleton(this.provide(), (app) => {
             return new Encryptor();
         });
     }
