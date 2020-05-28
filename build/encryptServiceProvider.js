@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EncryptServiceProvider = void 0;
-var encryptor_1 = require("./encryptor");
+var encrypter_1 = require("./encrypter");
 var core_1 = require("@rheas/core");
 var EncryptServiceProvider = /** @class */ (function (_super) {
     __extends(EncryptServiceProvider, _super);
@@ -28,7 +28,7 @@ var EncryptServiceProvider = /** @class */ (function (_super) {
      */
     EncryptServiceProvider.prototype.register = function () {
         this.container.singleton(this.provide(), function (app) {
-            return new encryptor_1.Encryptor();
+            return new encrypter_1.Encrypter();
         });
     };
     /**

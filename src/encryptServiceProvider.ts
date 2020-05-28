@@ -1,4 +1,4 @@
-import { Encryptor } from "./encryptor";
+import { Encrypter } from "./encrypter";
 import { ServiceProvider } from "@rheas/core";
 import { IDeferredService } from "../../contracts/build/services";
 
@@ -11,7 +11,7 @@ export class EncryptServiceProvider extends ServiceProvider implements IDeferred
      */
     public register() {
         this.container.singleton(this.provide(), (app) => {
-            return new Encryptor();
+            return new Encrypter();
         });
     }
 
