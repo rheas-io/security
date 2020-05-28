@@ -11,7 +11,7 @@ export class HashingServiceProvider extends ServiceProvider implements IDeferred
      * @inheritdoc
      */
     public register() {
-        this.container.singleton('hash', (app) => {
+        this.container.singleton(this.provide(), app => {
             const hashingConfig = (<IApp>app).config('hashing');
 
             return new HashingManager(hashingConfig);

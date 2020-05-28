@@ -27,7 +27,7 @@ var HashingServiceProvider = /** @class */ (function (_super) {
      * @inheritdoc
      */
     HashingServiceProvider.prototype.register = function () {
-        this.container.singleton('hash', function (app) {
+        this.container.singleton(this.provide(), function (app) {
             var hashingConfig = app.config('hashing');
             return new hashingManager_1.HashingManager(hashingConfig);
         });
