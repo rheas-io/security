@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import { IHasher } from "@rheas/contracts/security";
 
 export class BcryptHashing implements IHasher {
-
     /**
      * The number of rounds to be used for salt generation.
      * 
@@ -28,5 +27,4 @@ export class BcryptHashing implements IHasher {
     public async compare(value: string, hashedValue: string): Promise<boolean> {
         return await bcrypt.compare(value, hashedValue);
     }
-
 }
