@@ -48,7 +48,8 @@ var BaseHmacHasher = /** @class */ (function () {
      *
      * @param key
      */
-    function BaseHmacHasher(key) {
+    function BaseHmacHasher(_a) {
+        var key = _a.key;
         this._key = key;
     }
     /**

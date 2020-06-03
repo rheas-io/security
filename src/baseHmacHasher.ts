@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { IHashConfig } from "@rheas/contracts/configs";
 import { IHmacHasher } from "@rheas/contracts/security";
 
 export abstract class BaseHmacHasher implements IHmacHasher {
@@ -16,7 +17,7 @@ export abstract class BaseHmacHasher implements IHmacHasher {
      * 
      * @param key 
      */
-    constructor(key: string) {
+    constructor({ key }: IHashConfig) {
         this._key = key;
     }
 

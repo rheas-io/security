@@ -1,3 +1,4 @@
+import { IHashConfig } from "@rheas/contracts/configs";
 import { IHmacHasher } from "@rheas/contracts/security";
 export declare abstract class BaseHmacHasher implements IHmacHasher {
     /**
@@ -12,7 +13,7 @@ export declare abstract class BaseHmacHasher implements IHmacHasher {
      *
      * @param key
      */
-    constructor(key: string);
+    constructor({ key }: IHashConfig);
     /**
      * @inheritdoc
      *
