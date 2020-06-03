@@ -42,13 +42,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BcryptHashing = void 0;
 var bcrypt_1 = __importDefault(require("bcrypt"));
 var BcryptHashing = /** @class */ (function () {
-    function BcryptHashing() {
+    /**
+     * Creates a bcrypt hasher. Salt rounds are determined from
+     * the configuration file or a default value of 12 is used.
+     *
+     * @param param0
+     */
+    function BcryptHashing(_a) {
+        var bcrypt = _a.bcrypt;
         /**
          * The number of rounds to be used for salt generation.
          *
          * @var number
          */
-        this.rounds = 10;
+        this._rounds = 12;
+        this._rounds = (bcrypt && bcrypt.rounds) || 12;
     }
     /**
      * @inheritdoc
@@ -59,7 +67,7 @@ var BcryptHashing = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, bcrypt_1.default.hash(value, this.rounds)];
+                    case 0: return [4 /*yield*/, bcrypt_1.default.hash(value, this._rounds)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
