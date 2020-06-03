@@ -1,7 +1,15 @@
-import { ShaHashing } from "./shaHashing";
-export declare class Sha512Hashing extends ShaHashing {
+import { BaseHmacHasher } from "./baseHmacHasher";
+export declare class Sha512Hashing extends BaseHmacHasher {
     /**
-     * Creates a new sha-512 hasher
+     * @inheritdoc
+     *
+     * @param value
      */
-    constructor();
+    createHash(value: string): string | Promise<string>;
+    /**
+     * @inheritdoc
+     *
+     * @param value
+     */
+    createHmacHash(value: string): string | Promise<string>;
 }

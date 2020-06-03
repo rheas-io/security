@@ -1,11 +1,23 @@
-import { sha512 } from "sha.js";
-import { ShaHashing } from "./shaHashing";
+import CryptoJs from "crypto-js";
+import { BaseHmacHasher } from "./baseHmacHasher";
 
-export class Sha512Hashing extends ShaHashing {
+export class Sha512Hashing extends BaseHmacHasher {
+
     /**
-     * Creates a new sha-512 hasher
+     * @inheritdoc
+     * 
+     * @param value 
      */
-    constructor() {
-        super(new sha512());
+    public createHash(value: string): string | Promise<string> {
+        return CryptoJs.SHA512(value).toString();
+    }
+
+    /**
+     * @inheritdoc
+     * 
+     * @param value 
+     */
+    public createHmacHash(value: string): string | Promise<string> {
+        return CryptoJs.HmacSHA512(value, this._key).toString();
     }
 }

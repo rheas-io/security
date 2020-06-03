@@ -1,5 +1,5 @@
-import { IHasher } from "@rheas/contracts/security";
-export declare class Md5Hashing implements IHasher {
+import { BaseHmacHasher } from "./baseHmacHasher";
+export declare class Md5Hashing extends BaseHmacHasher {
     /**
      * @inheritdoc
      *
@@ -10,7 +10,6 @@ export declare class Md5Hashing implements IHasher {
      * @inheritdoc
      *
      * @param value
-     * @param hashedValue
      */
-    compare(value: string, hashedValue: string): boolean;
+    createHmacHash(value: string): string | Promise<string>;
 }

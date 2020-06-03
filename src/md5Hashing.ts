@@ -1,7 +1,7 @@
-import md5 from "md5";
-import { IHasher } from "@rheas/contracts/security";
+import CryptoJs from "crypto-js";
+import { BaseHmacHasher } from "./baseHmacHasher";
 
-export class Md5Hashing implements IHasher {
+export class Md5Hashing extends BaseHmacHasher {
 
     /**
      * @inheritdoc
@@ -9,16 +9,15 @@ export class Md5Hashing implements IHasher {
      * @param value 
      */
     public createHash(value: string): string {
-        return md5(value);
+        return CryptoJs.MD5(value).toString();
     }
 
     /**
      * @inheritdoc
      * 
      * @param value 
-     * @param hashedValue 
      */
-    public compare(value: string, hashedValue: string): boolean {
-        return md5(value) === hashedValue;
+    public createHmacHash(value: string): string | Promise<string> {
+        return CryptoJs.HmacMD5(value, this._key).toString();
     }
 }

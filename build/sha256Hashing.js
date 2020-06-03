@@ -12,18 +12,34 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Sha256Hashing = void 0;
-var sha_js_1 = require("sha.js");
-var shaHashing_1 = require("./shaHashing");
+var crypto_js_1 = __importDefault(require("crypto-js"));
+var baseHmacHasher_1 = require("./baseHmacHasher");
 var Sha256Hashing = /** @class */ (function (_super) {
     __extends(Sha256Hashing, _super);
-    /**
-     * Creates a new sha-256 hasher
-     */
     function Sha256Hashing() {
-        return _super.call(this, new sha_js_1.sha256()) || this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
+    /**
+     * @inheritdoc
+     *
+     * @param value
+     */
+    Sha256Hashing.prototype.createHash = function (value) {
+        return crypto_js_1.default.SHA256(value).toString();
+    };
+    /**
+     * @inheritdoc
+     *
+     * @param value
+     */
+    Sha256Hashing.prototype.createHmacHash = function (value) {
+        return crypto_js_1.default.HmacSHA256(value, this._key).toString();
+    };
     return Sha256Hashing;
-}(shaHashing_1.ShaHashing));
+}(baseHmacHasher_1.BaseHmacHasher));
 exports.Sha256Hashing = Sha256Hashing;

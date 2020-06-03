@@ -1,11 +1,23 @@
-import { sha256 } from "sha.js";
-import { ShaHashing } from "./shaHashing";
+import CryptoJs from "crypto-js";
+import { BaseHmacHasher } from "./baseHmacHasher";
 
-export class Sha256Hashing extends ShaHashing {
+export class Sha256Hashing extends BaseHmacHasher {
+
     /**
-     * Creates a new sha-256 hasher
+     * @inheritdoc
+     * 
+     * @param value 
      */
-    constructor() {
-        super(new sha256());
+    public createHash(value: string): string | Promise<string> {
+        return CryptoJs.SHA256(value).toString();
+    }
+
+    /**
+     * @inheritdoc
+     * 
+     * @param value 
+     */
+    public createHmacHash(value: string): string | Promise<string> {
+        return CryptoJs.HmacSHA256(value, this._key).toString();
     }
 }
