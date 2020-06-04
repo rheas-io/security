@@ -78,15 +78,10 @@ var Encrypter = /** @class */ (function () {
      * @param cipher
      */
     Encrypter.keyLength = function (cipher) {
-        var keyLengths = {
-            "aes-128-gcm": 16,
-            "aes-192-gcm": 24,
-            "aes-256-gcm": 32
-        };
-        if (keyLengths[cipher] === undefined) {
+        if (Encrypter.keyLengths[cipher] === undefined) {
             throw new encrypter_1.EncrypterException("Invalid cipher. Allowed ciphers are: aes-128-gcm, aes-192-gcm and aes-256-gcm");
         }
-        return keyLengths[cipher];
+        return Encrypter.keyLengths[cipher];
     };
     /**
      * Creates an application encrypter key.
@@ -168,6 +163,16 @@ var Encrypter = /** @class */ (function () {
         catch (err) {
             throw new encrypter_1.EncrypterException("Error decrypting the data").setException(err);
         }
+    };
+    /**
+     * Cipher key lengths
+     *
+     * @var object
+     */
+    Encrypter.keyLengths = {
+        "aes-128-gcm": 16,
+        "aes-192-gcm": 24,
+        "aes-256-gcm": 32
     };
     return Encrypter;
 }());

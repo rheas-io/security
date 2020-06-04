@@ -13,6 +13,17 @@ interface EncryptedJson {
 export class Encrypter implements IEncrypter {
 
     /**
+     * Cipher key lengths
+     * 
+     * @var object
+     */
+    public static readonly keyLengths = {
+        "aes-128-gcm": 16,
+        "aes-192-gcm": 24,
+        "aes-256-gcm": 32
+    };
+
+    /**
      * Stores the application encyption key.
      * 
      * @var string
@@ -62,19 +73,12 @@ export class Encrypter implements IEncrypter {
      * @param cipher 
      */
     public static keyLength(cipher: CipherGCMTypes) {
-        const keyLengths = {
-            "aes-128-gcm": 16,
-            "aes-192-gcm": 24,
-            "aes-256-gcm": 32
-        }
-
-        if (keyLengths[cipher] === undefined) {
+        if (Encrypter.keyLengths[cipher] === undefined) {
             throw new EncrypterException(
                 "Invalid cipher. Allowed ciphers are: aes-128-gcm, aes-192-gcm and aes-256-gcm"
             );
         }
-
-        return keyLengths[cipher];
+        return Encrypter.keyLengths[cipher];
     }
 
     /**

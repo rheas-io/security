@@ -3,6 +3,16 @@ import { CipherGCMTypes } from "crypto";
 import { IEncrypter } from "@rheas/contracts/security";
 export declare class Encrypter implements IEncrypter {
     /**
+     * Cipher key lengths
+     *
+     * @var object
+     */
+    static readonly keyLengths: {
+        "aes-128-gcm": number;
+        "aes-192-gcm": number;
+        "aes-256-gcm": number;
+    };
+    /**
      * Stores the application encyption key.
      *
      * @var string
