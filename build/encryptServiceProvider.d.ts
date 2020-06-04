@@ -1,5 +1,5 @@
 import { ServiceProvider } from "@rheas/core";
-import { IDeferredService } from "../../contracts/build/services";
+import { IDeferredService } from "@rheas/contracts/services";
 export declare class EncryptServiceProvider extends ServiceProvider implements IDeferredService {
     /**
      * Register the hashmanager on to the app.

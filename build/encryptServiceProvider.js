@@ -28,7 +28,8 @@ var EncryptServiceProvider = /** @class */ (function (_super) {
      */
     EncryptServiceProvider.prototype.register = function () {
         this.container.singleton(this.provide(), function (app) {
-            return new encrypter_1.Encrypter();
+            var config = app.config('app');
+            return new encrypter_1.Encrypter(config.key, config.cipher);
         });
     };
     /**

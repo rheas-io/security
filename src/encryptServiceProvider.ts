@@ -1,6 +1,8 @@
 import { Encrypter } from "./encrypter";
+import { IApp } from "@rheas/contracts/core";
 import { ServiceProvider } from "@rheas/core";
-import { IDeferredService } from "../../contracts/build/services";
+import { IAppConfig } from "@rheas/contracts/configs";
+import { IDeferredService } from "@rheas/contracts/services";
 
 export class EncryptServiceProvider extends ServiceProvider implements IDeferredService {
 
@@ -11,7 +13,9 @@ export class EncryptServiceProvider extends ServiceProvider implements IDeferred
      */
     public register() {
         this.container.singleton(this.provide(), (app) => {
-            return new Encrypter();
+            const config: IAppConfig = (<IApp>app).config('app');
+
+            return new Encrypter(config.key, config.cipher);
         });
     }
 

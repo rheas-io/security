@@ -22,7 +22,7 @@ var HashingServiceProvider = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
-     * Register the hashmanager on to the app.
+     * Register the hashmanager on to the app container.
      *
      * @inheritdoc
      */
