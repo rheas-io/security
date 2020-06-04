@@ -31,6 +31,19 @@ export declare class Encrypter implements IEncrypter {
      */
     private validateKey;
     /**
+     * Returns keylength of the given cipher. Throws an error if an invalid
+     * cipher is given.
+     *
+     * @param cipher
+     */
+    static keyLength(cipher: CipherGCMTypes): number;
+    /**
+     * Creates an application encrypter key.
+     *
+     * @param cipher
+     */
+    static generateKey(cipher: CipherGCMTypes): Promise<string>;
+    /**
      * @inheritdoc
      *
      * @param value

@@ -67,9 +67,41 @@ var Encrypter = /** @class */ (function () {
      */
     Encrypter.prototype.validateKey = function () {
         var keyLength = Buffer.from(this._key, 'hex').byteLength;
-        if (!(this._cipher === "aes-128-gcm" ? keyLength === 16 : keyLength === 32)) {
+        if (Encrypter.keyLength(this._cipher) !== keyLength) {
             throw new encrypter_1.EncrypterException("Invalid key length");
         }
+    };
+    /**
+     * Returns keylength of the given cipher. Throws an error if an invalid
+     * cipher is given.
+     *
+     * @param cipher
+     */
+    Encrypter.keyLength = function (cipher) {
+        var keyLengths = {
+            "aes-128-gcm": 16,
+            "aes-192-gcm": 24,
+            "aes-256-gcm": 32
+        };
+        if (keyLengths[cipher] === undefined) {
+            throw new encrypter_1.EncrypterException("Invalid cipher. Allowed ciphers are: aes-128-gcm, aes-192-gcm and aes-256-gcm");
+        }
+        return keyLengths[cipher];
+    };
+    /**
+     * Creates an application encrypter key.
+     *
+     * @param cipher
+     */
+    Encrypter.generateKey = function (cipher) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, support_1.Str.random(Encrypter.keyLength(cipher))];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
     };
     /**
      * @inheritdoc
