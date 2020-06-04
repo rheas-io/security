@@ -68,7 +68,7 @@ var Encrypter = /** @class */ (function () {
     Encrypter.prototype.validateKey = function () {
         var keyLength = Buffer.from(this._key, 'hex').byteLength;
         if (Encrypter.keyLength(this._cipher) !== keyLength) {
-            throw new encrypter_1.EncrypterException("Invalid key length");
+            throw new encrypter_1.EncrypterException("Invalid application key provided.");
         }
     };
     /**

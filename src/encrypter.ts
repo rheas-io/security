@@ -51,7 +51,7 @@ export class Encrypter implements IEncrypter {
         const keyLength = Buffer.from(this._key, 'hex').byteLength;
 
         if (Encrypter.keyLength(this._cipher) !== keyLength) {
-            throw new EncrypterException("Invalid key length");
+            throw new EncrypterException("Invalid application key provided.");
         }
     }
 
