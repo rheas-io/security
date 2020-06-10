@@ -27,20 +27,11 @@ var EncryptServiceProvider = /** @class */ (function (_super) {
      * @inheritdoc
      */
     EncryptServiceProvider.prototype.register = function () {
-        this.container.singleton(this.provide(), function (app) {
+        this.container.singleton(this.serviceName(), function (app) {
             var config = app.config('app');
             return new encrypter_1.Encrypter(config.key, config.cipher);
         });
     };
-    /**
-     * Defers this service registration, until it is actually needed
-     * somewhere.
-     *
-     * @returns string
-     */
-    EncryptServiceProvider.prototype.provide = function () {
-        return "encrypt";
-    };
     return EncryptServiceProvider;
-}(core_1.ServiceProvider));
+}(core_1.DeferredServiceProvider));
 exports.EncryptServiceProvider = EncryptServiceProvider;

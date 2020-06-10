@@ -14,8 +14,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HashingServiceProvider = void 0;
-var core_1 = require("@rheas/core");
 var hashingManager_1 = require("./hashingManager");
+var core_1 = require("@rheas/core");
 var HashingServiceProvider = /** @class */ (function (_super) {
     __extends(HashingServiceProvider, _super);
     function HashingServiceProvider() {
@@ -27,20 +27,11 @@ var HashingServiceProvider = /** @class */ (function (_super) {
      * @inheritdoc
      */
     HashingServiceProvider.prototype.register = function () {
-        this.container.singleton(this.provide(), function (app) {
+        this.container.singleton(this.serviceName(), function (app) {
             var hashingConfig = app.config('hashing');
             return new hashingManager_1.HashingManager(hashingConfig);
         });
     };
-    /**
-     * Defers this service registration, until it is actually needed
-     * somewhere.
-     *
-     * @returns string
-     */
-    HashingServiceProvider.prototype.provide = function () {
-        return "hash";
-    };
     return HashingServiceProvider;
-}(core_1.ServiceProvider));
+}(core_1.DeferredServiceProvider));
 exports.HashingServiceProvider = HashingServiceProvider;
