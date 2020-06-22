@@ -11,7 +11,7 @@ export class HashingServiceProvider extends DeferredServiceProvider {
      * @inheritdoc
      */
     public register() {
-        this.container.singleton(this._name, app => {
+        this.container.singleton(this.name, app => {
             const hashingConfig: IHashConfig = (<IApp>app).config('hashing');
 
             return new HashingManager(hashingConfig);

@@ -11,7 +11,7 @@ export class EncryptServiceProvider extends DeferredServiceProvider {
      * @inheritdoc
      */
     public register() {
-        this.container.singleton(this._name, app => {
+        this.container.singleton(this.name, app => {
             const config: IAppConfig = (<IApp>app).config('app');
 
             return new Encrypter(config.key, config.cipher);
