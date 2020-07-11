@@ -1,5 +1,6 @@
 import CryptoJs from "crypto-js";
 import { Str } from "@rheas/support";
+import { AnyObject } from "@rheas/contracts";
 import crypto, { CipherGCMTypes } from "crypto";
 import { IEncrypter } from "@rheas/contracts/security";
 import { EncrypterException } from "@rheas/errors/encrypter";
@@ -91,11 +92,12 @@ export class Encrypter implements IEncrypter {
     }
 
     /**
-     * @inheritdoc
+     * Encrypts the given value and returns a hex response of Json encoded 
+     * string containing iv, value and tag
      * 
      * @param value 
      */
-    public async encrypt(value: string | JSON): Promise<string> {
+    public async encrypt(value: string | AnyObject): Promise<string> {
 
         try {
             if (typeof value !== 'string') {
@@ -127,11 +129,12 @@ export class Encrypter implements IEncrypter {
     }
 
     /**
-     * @inheritdoc
+     * Decrypts the given encrypted value. Throws error if integrity fails 
+     * or auth tag does not match.
      * 
      * @param value 
      */
-    public decrypt(encrypted: string): string | JSON {
+    public decrypt(encrypted: string): string | AnyObject {
 
         try {
             // Convert the hex encoded value to JSON object containing

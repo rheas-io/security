@@ -1,4 +1,5 @@
 /// <reference types="node" />
+import { AnyObject } from "@rheas/contracts";
 import { CipherGCMTypes } from "crypto";
 import { IEncrypter } from "@rheas/contracts/security";
 export declare class Encrypter implements IEncrypter {
@@ -54,15 +55,17 @@ export declare class Encrypter implements IEncrypter {
      */
     static generateKey(cipher: CipherGCMTypes): Promise<string>;
     /**
-     * @inheritdoc
+     * Encrypts the given value and returns a hex response of Json encoded
+     * string containing iv, value and tag
      *
      * @param value
      */
-    encrypt(value: string | JSON): Promise<string>;
+    encrypt(value: string | AnyObject): Promise<string>;
     /**
-     * @inheritdoc
+     * Decrypts the given encrypted value. Throws error if integrity fails
+     * or auth tag does not match.
      *
      * @param value
      */
-    decrypt(encrypted: string): string | JSON;
+    decrypt(encrypted: string): string | AnyObject;
 }

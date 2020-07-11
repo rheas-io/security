@@ -15,7 +15,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EncryptServiceProvider = void 0;
 var encrypter_1 = require("./encrypter");
-var core_1 = require("@rheas/core");
+var helpers_1 = require("@rheas/support/helpers");
+var services_1 = require("@rheas/services");
 var EncryptServiceProvider = /** @class */ (function (_super) {
     __extends(EncryptServiceProvider, _super);
     function EncryptServiceProvider() {
@@ -28,10 +29,10 @@ var EncryptServiceProvider = /** @class */ (function (_super) {
      */
     EncryptServiceProvider.prototype.register = function () {
         this.container.singleton(this.name, function (app) {
-            var config = app.config('app');
-            return new encrypter_1.Encrypter(config.key, config.cipher);
+            var configs = helpers_1.config('app');
+            return new encrypter_1.Encrypter(configs.key, configs.cipher);
         });
     };
     return EncryptServiceProvider;
-}(core_1.DeferredServiceProvider));
+}(services_1.DeferredServiceProvider));
 exports.EncryptServiceProvider = EncryptServiceProvider;

@@ -99,7 +99,8 @@ var Encrypter = /** @class */ (function () {
         });
     };
     /**
-     * @inheritdoc
+     * Encrypts the given value and returns a hex response of Json encoded
+     * string containing iv, value and tag
      *
      * @param value
      */
@@ -134,7 +135,8 @@ var Encrypter = /** @class */ (function () {
         });
     };
     /**
-     * @inheritdoc
+     * Decrypts the given encrypted value. Throws error if integrity fails
+     * or auth tag does not match.
      *
      * @param value
      */
