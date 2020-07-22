@@ -54,7 +54,7 @@ var Encrypter = /** @class */ (function () {
      * @param cipher
      */
     function Encrypter(key, cipher) {
-        if (cipher === void 0) { cipher = "aes-128-gcm"; }
+        if (cipher === void 0) { cipher = "aes-256-gcm"; }
         this._key = key;
         this._cipher = cipher;
         this.validateKey();

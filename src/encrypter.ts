@@ -46,7 +46,7 @@ export class Encrypter implements IEncrypter {
      * @param key 
      * @param cipher 
      */
-    constructor(key: string, cipher: CipherGCMTypes = "aes-128-gcm") {
+    constructor(key: string, cipher: CipherGCMTypes = "aes-256-gcm") {
         this._key = key;
         this._cipher = cipher;
 
@@ -104,7 +104,7 @@ export class Encrypter implements IEncrypter {
                 value = JSON.stringify(value);
             }
 
-            // Initialization vector for AES algo always use a 16 byte
+            // Initialization vector for AES algo always uses a 16 byte
             // key
             const iv = await Str.random(16);
             const encrypter = crypto.createCipheriv(
