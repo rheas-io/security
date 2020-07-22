@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HashingManager = void 0;
-var md5Hashing_1 = require("./md5Hashing");
-var sha256Hashing_1 = require("./sha256Hashing");
-var sha512Hashing_1 = require("./sha512Hashing");
-var bcryptHashing_1 = require("./bcryptHashing");
-var HashingManager = /** @class */ (function () {
+const md5Hashing_1 = require("./md5Hashing");
+const sha256Hashing_1 = require("./sha256Hashing");
+const sha512Hashing_1 = require("./sha512Hashing");
+const bcryptHashing_1 = require("./bcryptHashing");
+class HashingManager {
     /**
      * Creates a hash manager. The default hasher is created for the
      * driver given in the configuration.
      *
      * @param hashConfig
      */
-    function HashingManager(hashConfig) {
+    constructor(hashConfig) {
         /**
          * The hashers available for use.
          *
@@ -32,33 +32,32 @@ var HashingManager = /** @class */ (function () {
      *
      * @returns IHasher
      */
-    HashingManager.prototype.getPasswordHasher = function () {
+    getPasswordHasher() {
         return this._passwordHasher;
-    };
+    }
     /**
      * @inheritdoc
      *
      * @param algo
      */
-    HashingManager.prototype.getNewHasher = function (algo) {
+    getNewHasher(algo) {
         return this.createHasher(algo);
-    };
+    }
     /**
      * Creates a hasher from name, if it exists on the hasher lists.
      * Otherwise a default hasher is created and returned.
      *
      * @param name
      */
-    HashingManager.prototype.createHasher = function (name) {
+    createHasher(name) {
         try {
-            var hasher = this._hashers[name];
+            const hasher = this._hashers[name];
             return new hasher(this._config);
         }
         catch (err) { }
         // Return a default hasher, if hasher for the algo is 
         // not found.
         return new md5Hashing_1.Md5Hashing(this._config);
-    };
-    return HashingManager;
-}());
+    }
+}
 exports.HashingManager = HashingManager;

@@ -1,38 +1,20 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EncryptServiceProvider = void 0;
-var encrypter_1 = require("./encrypter");
-var helpers_1 = require("@rheas/support/helpers");
-var services_1 = require("@rheas/services");
-var EncryptServiceProvider = /** @class */ (function (_super) {
-    __extends(EncryptServiceProvider, _super);
-    function EncryptServiceProvider() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
+const encrypter_1 = require("./encrypter");
+const helpers_1 = require("@rheas/support/helpers");
+const services_1 = require("@rheas/services");
+class EncryptServiceProvider extends services_1.DeferredServiceProvider {
     /**
      * Register the hashmanager on to the app.
      *
      * @inheritdoc
      */
-    EncryptServiceProvider.prototype.register = function () {
-        this.container.singleton(this.name, function (app) {
-            var configs = helpers_1.config('app');
+    register() {
+        this.container.singleton(this.name, app => {
+            const configs = helpers_1.config('app');
             return new encrypter_1.Encrypter(configs.key, configs.cipher);
         });
-    };
-    return EncryptServiceProvider;
-}(services_1.DeferredServiceProvider));
+    }
+}
 exports.EncryptServiceProvider = EncryptServiceProvider;
