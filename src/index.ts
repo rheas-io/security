@@ -1,7 +1,4 @@
-import { EncryptServiceProvider } from "./encryptServiceProvider";
-import { HashingServiceProvider } from "./hashingServiceProvider";
+import { EncryptServiceProvider } from './encryptServiceProvider';
+import { HashingServiceProvider } from './hashingServiceProvider';
 
-export {
-    EncryptServiceProvider,
-    HashingServiceProvider,
-}
+export { EncryptServiceProvider, HashingServiceProvider };

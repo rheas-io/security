@@ -1,12 +1,11 @@
-import crypto from "crypto";
-import { IHashConfig } from "@rheas/contracts/configs";
-import { IHmacHasher } from "@rheas/contracts/security";
+import crypto from 'crypto';
+import { IHashConfig } from '@rheas/contracts/configs';
+import { IHmacHasher } from '@rheas/contracts/security';
 
 export abstract class BaseHmacHasher implements IHmacHasher {
-
     /**
-     * The key to be used along with HMAc hashing. 
-     * 
+     * The key to be used along with HMAc hashing.
+     *
      * @var string
      */
     protected _key: string;
@@ -14,8 +13,8 @@ export abstract class BaseHmacHasher implements IHmacHasher {
     /**
      * Creates a new HMAC hasher. The argument is used as the hash key. This
      * should be available in the hash config file.
-     * 
-     * @param key 
+     *
+     * @param key
      */
     constructor({ key }: IHashConfig) {
         this._key = key;
@@ -23,23 +22,23 @@ export abstract class BaseHmacHasher implements IHmacHasher {
 
     /**
      * @inheritdoc
-     *  
-     * @param value 
+     *
+     * @param value
      */
     public abstract createHash(value: string): string | Promise<string>;
 
     /**
      * @inheritdoc
-     * 
-     * @param value 
+     *
+     * @param value
      */
     public abstract createHmacHash(value: string): string | Promise<string>;
 
     /**
      * @inheritdoc
-     * 
-     * @param value 
-     * @param hashedValue 
+     *
+     * @param value
+     * @param hashedValue
      */
     public async compare(value: string, hashedValue: string): Promise<boolean> {
         const hashedData = await this.createHash(value);
@@ -49,9 +48,9 @@ export abstract class BaseHmacHasher implements IHmacHasher {
 
     /**
      * @inheritdoc
-     * 
-     * @param value 
-     * @param hashedValue 
+     *
+     * @param value
+     * @param hashedValue
      */
     public async compareHmacHash(value: string, hashedValue: string): Promise<boolean> {
         const hashedData = await this.createHmacHash(value);
@@ -61,9 +60,9 @@ export abstract class BaseHmacHasher implements IHmacHasher {
 
     /**
      * @inheritdoc
-     * 
-     * @param hashToCheck 
-     * @param preHashedData 
+     *
+     * @param hashToCheck
+     * @param preHashedData
      */
     public compareHashes(hashToCheck: string, preHashedData: string): boolean {
         try {

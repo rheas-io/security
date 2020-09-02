@@ -1,12 +1,11 @@
-import bcrypt from "bcrypt";
-import { IHasher } from "@rheas/contracts/security";
-import { IHashConfig } from "@rheas/contracts/configs";
+import bcrypt from 'bcrypt';
+import { IHasher } from '@rheas/contracts/security';
+import { IHashConfig } from '@rheas/contracts/configs';
 
 export class BcryptHashing implements IHasher {
-
     /**
      * The number of rounds to be used for salt generation.
-     * 
+     *
      * @var number
      */
     protected _rounds: number = 12;
@@ -14,8 +13,8 @@ export class BcryptHashing implements IHasher {
     /**
      * Creates a bcrypt hasher. Salt rounds are determined from
      * the configuration file or a default value of 12 is used.
-     * 
-     * @param param0 
+     *
+     * @param param0
      */
     constructor({ bcrypt }: IHashConfig) {
         this._rounds = (bcrypt && bcrypt.rounds) || 12;
@@ -23,8 +22,8 @@ export class BcryptHashing implements IHasher {
 
     /**
      * @inheritdoc
-     * 
-     * @param value 
+     *
+     * @param value
      */
     public async createHash(value: string): Promise<string> {
         return await bcrypt.hash(value, this._rounds);
@@ -32,9 +31,9 @@ export class BcryptHashing implements IHasher {
 
     /**
      * @inheritdoc
-     * 
-     * @param value 
-     * @param hashedValue 
+     *
+     * @param value
+     * @param hashedValue
      */
     public async compare(value: string, hashedValue: string): Promise<boolean> {
         return await bcrypt.compare(value, hashedValue);
