@@ -1,20 +1,20 @@
-import { Encrypter } from "./encrypter";
-import { config } from "@rheas/support/helpers";
-import { IAppConfig } from "@rheas/contracts/configs";
-import { DeferredServiceProvider } from "@rheas/services";
+import { Encrypter } from './encrypter';
+import { config } from '@rheas/support/helpers';
+import { IAppConfig } from '@rheas/contracts/configs';
+import { DeferredServiceProvider } from '@rheas/services';
+import { InstanceHandler } from '@rheas/contracts/container';
 
 export class EncryptServiceProvider extends DeferredServiceProvider {
-
     /**
-     * Register the hashmanager on to the app.
-     * 
-     * @inheritdoc
+     * Returns application encrypter service resolver.
+     *
+     * @returns
      */
-    public register() {
-        this.container.singleton(this.name, app => {
+    public serviceResolver(): InstanceHandler {
+        return () => {
             const configs: IAppConfig = config('app');
 
             return new Encrypter(configs.key, configs.cipher);
-        });
+        };
     }
 }
