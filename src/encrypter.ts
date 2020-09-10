@@ -1,6 +1,5 @@
 import CryptoJs from 'crypto-js';
 import { Str } from '@rheas/support';
-import { AnyObject } from '@rheas/contracts';
 import crypto, { CipherGCMTypes } from 'crypto';
 import { IEncrypter } from '@rheas/contracts/security';
 import { EncrypterException } from '@rheas/errors/encrypter';
@@ -96,12 +95,8 @@ export class Encrypter implements IEncrypter {
      *
      * @param value
      */
-    public async encrypt(value: string | AnyObject): Promise<string> {
+    public async encrypt(value: string): Promise<string> {
         try {
-            if (typeof value !== 'string') {
-                value = JSON.stringify(value);
-            }
-
             // Initialization vector for AES algo always uses a 16 byte
             // key
             const iv = await Str.random(16);
@@ -135,7 +130,7 @@ export class Encrypter implements IEncrypter {
      *
      * @param value
      */
-    public decrypt(encrypted: string): string | AnyObject {
+    public decrypt(encrypted: string): string {
         try {
             // Convert the hex encoded value to JSON object containing
             // the iv, value and tag.
@@ -157,12 +152,6 @@ export class Encrypter implements IEncrypter {
                 decrypter.update(Buffer.from(value, 'hex')),
                 decrypter.final(),
             ]).toString('utf8');
-
-            // Try to parse JSON string from the decryoted value or throws
-            // an error if not a JSON object.
-            try {
-                return JSON.parse(decryptedValue);
-            } catch (err) {}
 
             return decryptedValue;
         } catch (err) {
