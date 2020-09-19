@@ -60,7 +60,7 @@ export class Encrypter implements IEncrypter {
     private validateKey(): void {
         const keyLength = Buffer.from(this._key, 'hex').byteLength;
 
-        if (Encrypter.keyLength(this._cipher) !== keyLength) {
+        if (this.keyLength(this._cipher) !== keyLength) {
             throw new EncrypterException('Invalid application key provided.');
         }
     }
@@ -71,7 +71,7 @@ export class Encrypter implements IEncrypter {
      *
      * @param cipher
      */
-    public static keyLength(cipher: CipherGCMTypes) {
+    public keyLength(cipher: CipherGCMTypes = this._cipher) {
         if (Encrypter.keyLengths[cipher] === undefined) {
             throw new EncrypterException(
                 'Invalid cipher. Allowed ciphers are: aes-128-gcm, aes-192-gcm and aes-256-gcm',
@@ -85,8 +85,8 @@ export class Encrypter implements IEncrypter {
      *
      * @param cipher
      */
-    public static async generateKey(cipher: CipherGCMTypes): Promise<string> {
-        return await Str.random(Encrypter.keyLength(cipher));
+    public async generateKey(cipher: CipherGCMTypes = this._cipher): Promise<string> {
+        return await Str.random(this.keyLength(cipher));
     }
 
     /**
