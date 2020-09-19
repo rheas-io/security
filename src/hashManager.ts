@@ -1,12 +1,12 @@
-import { Md5Hashing } from './md5Hashing';
-import { Sha256Hashing } from './sha256Hashing';
-import { Sha512Hashing } from './sha512Hashing';
-import { BcryptHashing } from './bcryptHashing';
+import { Md5Hasher } from './md5Hasher';
+import { Sha256Hasher } from './sha256Hasher';
+import { Sha512Hasher } from './sha512Hasher';
+import { BcryptHasher } from './bcryptHasher';
 import { KeyValue, ClassOf } from '@rheas/contracts';
 import { IHashConfig } from '@rheas/contracts/configs';
 import { IHashManager, IHasher } from '@rheas/contracts/security';
 
-export class HashingManager implements IHashManager {
+export class HashManager implements IHashManager {
     /**
      * Application hashing related configurations.
      *
@@ -27,10 +27,10 @@ export class HashingManager implements IHashManager {
      * @var object
      */
     protected _hashers: KeyValue<ClassOf<IHasher>> = {
-        md5: Md5Hashing,
-        bcrypt: BcryptHashing,
-        'sha-256': Sha256Hashing,
-        'sha-512': Sha512Hashing,
+        md5: Md5Hasher,
+        bcrypt: BcryptHasher,
+        'sha-256': Sha256Hasher,
+        'sha-512': Sha512Hasher,
     };
 
     /**
@@ -77,6 +77,6 @@ export class HashingManager implements IHashManager {
 
         // Return a default hasher, if hasher for the algo is
         // not found.
-        return new Md5Hashing(this._config);
+        return new Md5Hasher(this._config);
     }
 }

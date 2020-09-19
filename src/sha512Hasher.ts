@@ -1,7 +1,7 @@
 import CryptoJs from 'crypto-js';
 import { BaseHmacHasher } from './baseHmacHasher';
 
-export class Sha512Hashing extends BaseHmacHasher {
+export class Sha512Hasher extends BaseHmacHasher {
     /**
      * @inheritdoc
      *

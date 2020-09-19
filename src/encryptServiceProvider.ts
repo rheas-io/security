@@ -1,18 +1,18 @@
 import { Encrypter } from './encrypter';
-import { config } from '@rheas/support/helpers';
+import { IApp } from '@rheas/contracts/core/app';
+import { ServiceProvider } from '@rheas/services';
 import { IAppConfig } from '@rheas/contracts/configs';
-import { DeferredServiceProvider } from '@rheas/services';
 import { InstanceHandler } from '@rheas/contracts/container';
 
-export class EncryptServiceProvider extends DeferredServiceProvider {
+export class EncryptServiceProvider extends ServiceProvider {
     /**
      * Returns application encrypter service resolver.
      *
      * @returns
      */
     public serviceResolver(): InstanceHandler {
-        return () => {
-            const configs: IAppConfig = config('app');
+        return (app) => {
+            const configs: IAppConfig = (app as IApp).configs().get('app');
 
             return new Encrypter(configs.key, configs.cipher);
         };

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { IHasher } from '@rheas/contracts/security';
 import { IHashConfig } from '@rheas/contracts/configs';
 
-export class BcryptHashing implements IHasher {
+export class BcryptHasher implements IHasher {
     /**
      * The number of rounds to be used for salt generation.
      *
