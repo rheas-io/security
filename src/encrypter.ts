@@ -1,5 +1,5 @@
 import CryptoJs from 'crypto-js';
-import { Str } from '@rheas/support';
+import { Str } from '@rheas/support/str';
 import crypto, { CipherGCMTypes } from 'crypto';
 import { IEncrypter } from '@rheas/contracts/security';
 import { EncrypterException } from '@rheas/errors/encrypter';
