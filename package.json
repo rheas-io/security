@@ -15,6 +15,9 @@
     "hash",
     "bcrypt"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "tsc": "tsc",
     "test": "jest",
@@ -25,16 +28,20 @@
     "build-dev": "tsc --outDir ./build_dev && npm run copypackage_dev"
   },
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "crypto-js": "^4.0.0"
   },
   "devDependencies": {
+    "@rheas/contracts": "^0.0.1",
+    "@rheas/errors": "^0.0.1",
+    "@rheas/services": "^0.0.1",
+    "@rheas/support": "^0.0.1",
     "@types/bcrypt": "^3.0.0",
     "@types/crypto-js": "^3.1.47",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.2",
-    "jest": "^25.4.0",
-    "ts-jest": "^25.4.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.4.1",
     "typescript": "^3.8.3"
   },
   "repository": {
