@@ -43,12 +43,17 @@ export class Encrypter implements IEncrypter {
      *
      * @param key
      * @param cipher
+     * @param runningInConsole
      */
-    constructor(key: string, cipher: CipherGCMTypes = 'aes-256-gcm') {
+    constructor(key: string, cipher: CipherGCMTypes = 'aes-256-gcm', runningInConsole = false) {
         this._key = key;
         this._cipher = cipher;
 
-        this.validateKey();
+        // If either a key is given, or when the app is not running in console
+        // check the validity of the key.
+        if (key || !runningInConsole) {
+            this.validateKey();
+        }
     }
 
     /**
@@ -58,9 +63,7 @@ export class Encrypter implements IEncrypter {
      * @throws
      */
     private validateKey(): void {
-        const keyLength = Buffer.from(this._key, 'hex').byteLength;
-
-        if (this.keyLength(this._cipher) !== keyLength) {
+        if (this.keyLength(this._cipher) !== this._key.length) {
             throw new EncrypterException('Invalid application key provided.');
         }
     }

@@ -14,7 +14,7 @@ export class EncryptServiceProvider extends ServiceProvider {
         return (app) => {
             const configs: IAppConfig = (app as IApp).configs().get('app');
 
-            return new Encrypter(configs.key, configs.cipher);
+            return new Encrypter(configs.key, configs.cipher, (app as IApp).isRunningInConsole());
         };
     }
 }
