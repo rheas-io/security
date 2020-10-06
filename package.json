@@ -34,7 +34,7 @@
     "crypto-js": "^4.0.0"
   },
   "devDependencies": {
-    "@rheas/contracts": "^0.0.1",
+    "@rheas/contracts": "^0.0.3",
     "@rheas/errors": "^0.0.1",
     "@rheas/services": "^0.0.1",
     "@rheas/support": "^0.0.1",
