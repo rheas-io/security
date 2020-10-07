@@ -93,7 +93,7 @@ export class Encrypter implements IEncrypter {
     }
 
     /**
-     * Encrypts the given value and returns a hex response of Json encoded
+     * Encrypts the given value and returns a Base64 response of Json encoded
      * string containing iv, value and tag
      *
      * @param value
@@ -103,23 +103,20 @@ export class Encrypter implements IEncrypter {
             // Initialization vector for AES algo always uses a 16 byte
             // key
             const iv = await Str.random(16);
-            const encrypter = crypto.createCipheriv(
-                this._cipher,
-                Buffer.from(this._key, 'hex'),
-                Buffer.from(iv, 'hex'),
-            );
+            const encrypter = crypto.createCipheriv(this._cipher, this._key, iv);
 
             const encrypted = Buffer.concat([encrypter.update(value, 'utf8'), encrypter.final()]);
 
-            // Returns a hex encoded JSON containing iv, encrypted value as
-            // value and auth tag as tag. All the three values are hex encoded.
+            // Returns a Base64 encoded JSON containing iv, encrypted value as
+            // value and auth tag as tag. iv is a random string, other values are
+            // base64 encoded.
             return CryptoJs.enc.Utf8.parse(
                 JSON.stringify({
                     iv: iv,
-                    value: encrypted.toString('hex'),
-                    tag: encrypter.getAuthTag().toString('hex'),
+                    value: encrypted.toString('base64'),
+                    tag: encrypter.getAuthTag().toString('base64'),
                 }),
-            ).toString();
+            ).toString(CryptoJs.enc.Base64);
         } catch (err) {
             // Throws an encryption error if any sort of error like Json parse
             // error or cipher creation/ update error occurs.
@@ -135,24 +132,20 @@ export class Encrypter implements IEncrypter {
      */
     public decrypt(encrypted: string): string {
         try {
-            // Convert the hex encoded value to JSON object containing
+            // Convert the base64 encoded value to JSON object containing
             // the iv, value and tag.
             const { iv, value, tag }: EncryptedJson = JSON.parse(
-                CryptoJs.enc.Hex.parse(encrypted).toString(CryptoJs.enc.Utf8),
+                CryptoJs.enc.Base64.parse(encrypted).toString(CryptoJs.enc.Utf8),
             );
 
             const decrypter = crypto
-                .createDecipheriv(
-                    this._cipher,
-                    Buffer.from(this._key, 'hex'),
-                    Buffer.from(iv, 'hex'),
-                )
-                .setAuthTag(Buffer.from(tag, 'hex'));
+                .createDecipheriv(this._cipher, this._key, iv)
+                .setAuthTag(Buffer.from(tag, 'base64'));
 
-            // Decrypts the encrypted hex value and converts it into a utf8
+            // Decrypts the encrypted base64 value and converts it into a utf8
             // encoded human readable string.
             const decryptedValue = Buffer.concat([
-                decrypter.update(Buffer.from(value, 'hex')),
+                decrypter.update(Buffer.from(value, 'base64')),
                 decrypter.final(),
             ]).toString('utf8');
 
